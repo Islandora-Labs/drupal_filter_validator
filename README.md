@@ -26,7 +26,7 @@ You can use whatever tool you want to validate your filter-drupal.xml file, but 
 
 To run test_db_connection.sh, provide the path to your filter-drupal.xml file as a parameter:
 
-```test_db_connection.sh filter-drupal.xml```
+```./test_db_connection.sh filter-drupal.xml```
 
 This script returns 0 on successful connection, and uses MySQL's error code if it can't.
 
