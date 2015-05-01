@@ -20,7 +20,7 @@ USER="$(xpath -q -e '//connection/@user' $1 | sed  "s/user=\"//" | sed s/\"// | 
 PASSWORD="$(xpath -q -e '//connection/@password' $1 | sed  "s/password=\"//" | sed s/\"// | sed -e 's/^[ \t]*//' | tr -d '\n')"
 
 # Set up MySQL command to test credentials, then run the command.
-MYSQLCOMMAND="$MYSQL --silent -h${SERVER} -u${USER} -p${PASSWORD} $DBNAME"
+MYSQLCOMMAND="$MYSQL -s -h${SERVER} -u${USER} -p${PASSWORD} -e 'USE $DBNAME'"
 $MYSQLCOMMAND
 ERROR_CODE=$?
 
