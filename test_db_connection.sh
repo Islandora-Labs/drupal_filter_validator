@@ -28,14 +28,14 @@ ERROR_CODE=$?
 
 # Test for success and exit with a useful code and message.
 if [ $ERROR_CODE -eq 0 ]; then
-	  # select,insert,update
-	  if [[ $MYSQLSHOWOUTPUT =~ select,insert,update ]]; then
-        printf "Connection to Drupal database successful, and user $USER has select,insert,update privileges on the users table.\n"
-      else
-	    printf "Connection to Drupal database successful, bu user $USER does not have sufficient privileges on the users table.\n"
-	  fi
-      exit $ERROR_CODE
+  # select,insert,update
+  if [[ $MYSQLSHOWOUTPUT =~ select,insert,update ]]; then
+    printf "Connection to Drupal database successful, and user $USER has select,insert,update privileges on the users table.\n"
+  else
+    printf "Connection to Drupal database successful, bu user $USER does not have sufficient privileges on the users table.\n"
+  fi
+   exit $ERROR_CODE
 else
-      printf "Can't connect to Drupal database with credentials provided\n"
-      exit $ERROR_CODE
+  printf "Can't connect to Drupal database with credentials provided\n"
+  exit $ERROR_CODE
 fi
