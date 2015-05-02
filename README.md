@@ -16,7 +16,7 @@ Note that filter-drupal.xml files currently distributed with Islandora don't inc
 
 ## Requirements
 
-* The shell script uses the `xpath` utility that ships with Ubuntu.
+* The shell script uses the `xpath` utility ([manpage](http://manpages.ubuntu.com/manpages/precise/en/man1/xpath.1p.html)) that ships with Ubuntu.
 * `mysqlshow` must be intalled on the server where the script is running.
 
 
