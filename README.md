@@ -30,7 +30,7 @@ To run test_db_connection.sh, provide the path to your filter-drupal.xml file as
 
 ```./test_db_connection.sh filter-drupal.xml```
 
-This script returns 0 on successful connection, and uses MySQL's error code if it can't (1). The script will exit with 2 is the user doesn't have select, insert, and update privileges on the Drupal user table.
+This script returns 0 on successful connection, and uses MySQL's error code (1) if it can't. The script will exit with 2 is the user doesn't have select, insert, and update privileges on the Drupal user table.
 
 ## Troubleshooting/Issues
 
