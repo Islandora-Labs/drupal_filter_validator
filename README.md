@@ -12,11 +12,11 @@ Note that filter-drupal.xml files currently distributed with Islandora don't inc
 <FilterDrupal_Connection xmlns="http://islandora.ca">
 ```
 
-* a shell script that parses your filter-drupal.xml file for your Drupal database connection details and tests the connection.
+* a shell script that parses your filter-drupal.xml file for your Drupal database connection details, tests the connection, and tests the user's privileges on the Drupal user table.
 
 ## Requirements
 
-* The shell script uses the `xpath` utility that ships with Ubuntu. We're working on removing this dependency.
+* The shell script uses the `xpath` utility that ships with Ubuntu.
 * mysqlaccess must be intalled on the server where the script is running.
 
 
