@@ -33,9 +33,9 @@ if [ $ERROR_CODE -eq 0 ]; then
     printf "Connection to Drupal database successful, and user $USER has select,insert,update privileges on the users table.\n"
   else
     printf "Connection to Drupal database successful, but user $USER does not have sufficient privileges on the users table.\n"
+    # Use exit code 2 if the user doesn't have select, insert, and update privs.
+    exit 2    
   fi
-   # Use exit code 2 if the user doesn't have select, insert, and update privs.
-   exit 2
 else
   printf "Can't connect to Drupal database with credentials provided\n"
   # mysqlshow exits with 1 if it can't connect.
