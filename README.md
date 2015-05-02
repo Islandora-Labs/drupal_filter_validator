@@ -17,7 +17,7 @@ Note that filter-drupal.xml files currently distributed with Islandora don't inc
 ## Requirements
 
 * The shell script uses the `xpath` utility that ships with Ubuntu.
-* mysqlaccess must be intalled on the server where the script is running.
+* mysqlshow must be intalled on the server where the script is running.
 
 
 ## Usage
