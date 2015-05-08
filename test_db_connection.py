@@ -7,12 +7,15 @@ filter_drupal.xml files.
 Usage: ./test_db_connection.py /path/to/filter_drupal.xml
 """
 
+# @todo: Add support for the Islandora namespace. Trick will be to make the
+# namespace optional.
+
 import sys
 import os
 import argparse
-import subprocess
 import re
 from xml.etree import ElementTree
+from subprocess import CalledProcessError, check_output
 
 argparser = argparse.ArgumentParser()
 argparser.add_argument("path_to_filter_drupal_xml", help = "The filter_drupal.xml file to test")
@@ -35,12 +38,16 @@ for node in tree.findall('.//connection'):
     user = node.attrib.get('user')
     password = node.attrib.get('password')
 
-    mysqlshowoutput = subprocess.check_output('mysqlshow -h' + server + ' -P' + port + ' -u' + user + ' -p' + password + ' ' + dbname + ' users uid', shell=True)
-    if re.search('select,insert,update', mysqlshowoutput):
-        print "Connection to Drupal database successful, and user %s has select,insert,update privileges on the users table." % user
-        sys.exit(0)
-    else:
-        print "Connection to Drupal database successful, but user %s does not have sufficient privileges on the users table." % user
-        sys.exit(2)
+    try:
+        mysqlshowoutput = check_output('mysqlshow --host=' + server + ' --port=' + port + ' -u' + user + ' -p' + password + ' ' + dbname + ' users uid', shell=True)
+        print mysqlshowoutput
+        if re.search('select,insert,update', mysqlshowoutput):
+            print "Connection to Drupal database successful, and user %s has select,insert,update privileges on the users table." % user
+            sys.exit(0)
+        else:
+            print "Connection to Drupal database successful, but user %s does not have sufficient privileges on the users table." % user
+            sys.exit(2)
+    except CalledProcessError as e:
+       sys.exit(e.returncode)
 
 # @todo: Don't exit within loop since we want to check all the connections.
