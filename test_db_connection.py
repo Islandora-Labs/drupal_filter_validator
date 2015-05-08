@@ -4,7 +4,10 @@
 Script to test database connection parameters in Islandora
 filter_drupal.xml files.
 
-Usage: ./test_db_connection.py /path/to/filter_drupal.xml
+Usage: ./test_db_connection.py /path/to/filter_drupal.xml [-n]
+
+Use the -n flag if your filter_drupal.xml file uses the "http://islandora.ca"
+default namespace.
 """
 
 # @todo: Add support for the Islandora namespace. Trick will be to make the
@@ -18,7 +21,8 @@ from xml.etree import ElementTree
 from subprocess import CalledProcessError, check_output
 
 argparser = argparse.ArgumentParser()
-argparser.add_argument("path_to_filter_drupal_xml", help = "The filter_drupal.xml file to test")
+argparser.add_argument("path_to_filter_drupal_xml", help = "Path to the filter_drupal.xml file to test")
+argparser.add_argument("-n", help = "The filter_drupal.xml file declares default namespace as 'http://islandora.ca'", action="store_true")
 args = argparser.parse_args()
 
 if not os.path.exists(args.path_to_filter_drupal_xml):
@@ -28,10 +32,16 @@ if not os.path.exists(args.path_to_filter_drupal_xml):
 with open(args.path_to_filter_drupal_xml, 'r') as f:
     tree = ElementTree.parse(f)
 
+if args.n:
+    nsmap = {'islandora': 'http://islandora.ca'}
+    nodes = tree.findall('islandora:connection', namespaces=nsmap)
+else:
+    nodes = tree.findall('connection')
+
 # Assume that the filter_drupal.xml file has been validated.
 # Loop through each of the connection elements, grab the database
 # connection attributes, and test them against the Drupal database.
-for node in tree.findall('.//connection'):
+for node in nodes:
     server = node.attrib.get('server')
     port = node.attrib.get('port')
     dbname = node.attrib.get('dbname')
