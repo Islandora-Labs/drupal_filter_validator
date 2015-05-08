@@ -35,7 +35,7 @@ for node in tree.findall('.//connection'):
     user = node.attrib.get('user')
     password = node.attrib.get('password')
 
-    mysqlshowoutput = subprocess.check_output('mysqlshow -h' + server + ' -P' + port + ' -u' + user + ' -p' + password dbname + ' users uid', shell=True)
+    mysqlshowoutput = subprocess.check_output('mysqlshow -h' + server + ' -P' + port + ' -u' + user + ' -p' + password + ' ' + dbname + ' users uid', shell=True)
     if re.search('select,insert,update', mysqlshowoutput):
         print "Connection to Drupal database successful, and user %s has select,insert,update privileges on the users table." % user
         sys.exit(0)
@@ -43,4 +43,4 @@ for node in tree.findall('.//connection'):
         print "Connection to Drupal database successful, but user %s does not have sufficient privileges on the users table." % user
         sys.exit(2)
 
-
+# @todo: Don't exit within loop since we want to check all the connections.
