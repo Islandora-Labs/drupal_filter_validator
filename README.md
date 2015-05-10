@@ -12,11 +12,11 @@ Note that filter-drupal.xml files currently distributed with Islandora don't inc
 <FilterDrupal_Connection xmlns="http://islandora.ca">
 ```
 
-* a shell script that parses your filter-drupal.xml file for your Drupal database connection details, tests the connection, and tests the user's privileges on the Drupal user table.
+* a Python (2.7) script that parses your filter-drupal.xml file for your Drupal databaes connection details and tests each `<connection>` entry in the file.
 
 ## Requirements
 
-* The shell script uses the `xpath` utility ([manpage](http://manpages.ubuntu.com/manpages/precise/en/man1/xpath.1p.html)) that ships with Ubuntu. On RedHat systems, this can be installed with `yum install perl-XML-XPath`.
+* Python 2.7 or higher.
 * `mysqlshow` must be intalled on the server where the script is running.
 
 
@@ -26,11 +26,15 @@ You can use whatever tool you want to validate your filter-drupal.xml file, but 
 
 `xmllint --schema filter-drupal.xsd filter-drupal.xml`
 
-To run test_db_connection.sh, provide the path to your filter-drupal.xml file as a parameter:
+Note that you will need to add the xmlns="http://islandora.ca" namespace declaration to your filter-drupal.xml file to validate it.
 
-```./test_db_connection.sh filter-drupal.xml```
+To run test_db_connection.py, provide the path to your filter-drupal.xml file as a parameter:
 
-This script returns 0 on successful connection, and uses MySQL's error code (1) if it can't. The script will exit with 2 is the user doesn't have select, insert, and update privileges on the Drupal user table.
+```./test_db_connection.py filter-drupal.xml [-n]```
+
+This script returns 0 if all `<connection>` entries can successfully connect to their respective databases, and returns 1 if there are any errors.
+
+The test_db_connection.py script takes an optional '-n' paramter to indicate that the filter-drupal.xml file declares the "http://islandora.ca" namespace.
 
 ## Troubleshooting/Issues
 
