@@ -6,10 +6,10 @@ Utilities for validating [Islandora filter-drupal.xml files](https://github.com/
 
 * an XSD schema for validating filter-drupal.xml files
 
-Note that filter-drupal.xml files currently distributed with Islandora don't include a namespace declaration so they won't validate against this (or any other) schema. If you want to validate your filter-drupal.xml file against this schema, add `xmlns=http://islandora.ca` to the root element, like this:
+Note that filter-drupal.xml files currently distributed with Islandora don't include a namespace declaration so they won't validate against this (or any other) schema. If you want to validate your filter-drupal.xml file against this schema, add `xmlns=http://www.islandora.ca` to the root element, like this:
 
 ```xml
-<FilterDrupal_Connection xmlns="http://islandora.ca">
+<FilterDrupal_Connection xmlns="http://www.islandora.ca">
 ```
 
 * a Python script that parses your filter-drupal.xml file for your Drupal databaes connection details and tests each `<connection>` entry in the file.
@@ -26,7 +26,7 @@ You can use whatever tool you want to validate your filter-drupal.xml file, but 
 
 `xmllint --schema filter-drupal.xsd filter-drupal.xml`
 
-Remember that you will need to add the xmlns="http://islandora.ca" namespace declaration to your filter-drupal.xml file to validate it.
+Remember that you will need to add the xmlns="http://www.islandora.ca" namespace declaration to your filter-drupal.xml file to validate it.
 
 To run test_db_connection.py, provide the path to your filter-drupal.xml file as a parameter:
 

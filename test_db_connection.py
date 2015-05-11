@@ -26,10 +26,10 @@ with open(args.path_to_filter_drupal_xml, 'r') as f:
     tree = ElementTree.parse(f)
 
 # Check to see if the input file has the default namespace declaration
-# of 'http://islandora.ca'.
+# of 'http://www.islandora.ca'.
 root = tree.getroot()
-if re.search('{http://islandora.ca}', root.tag):
-    nsmap = {'islandora': 'http://islandora.ca'}
+if re.search('{http://www.islandora.ca}', root.tag):
+    nsmap = {'islandora': 'http://www.islandora.ca'}
     nodes = tree.findall('islandora:connection', namespaces=nsmap)
 else:
     nodes = tree.findall('connection')
