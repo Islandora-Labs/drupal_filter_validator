@@ -15,7 +15,7 @@ from xml.etree import ElementTree
 from subprocess import CalledProcessError, check_output, STDOUT
 
 argparser = argparse.ArgumentParser()
-argparser.add_argument("path_to_filter_drupal_xml", help = "Path to the filter_drupal.xml file to test")
+argparser.add_argument("path_to_filter_drupal_xml", help="Path to the filter_drupal.xml file to test")
 args = argparser.parse_args()
 
 if not os.path.exists(args.path_to_filter_drupal_xml):
@@ -33,10 +33,6 @@ if re.search('{http://islandora.ca}', root.tag):
     nodes = tree.findall('islandora:connection', namespaces=nsmap)
 else:
     nodes = tree.findall('connection')
-
-if len(nodes) is 0:
-    print "Sorry, can't find any connection elements in %s. You may want to check its namespace declaration." % args.path_to_filter_drupal_xml
-    sys.exit(1)
 
 # Loop through each of the connection elements, grab the database
 # connection attributes, and test them against the Drupal database.
