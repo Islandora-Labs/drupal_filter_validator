@@ -20,7 +20,7 @@ if __name__ == "__main__":
     args = argparser.parse_args()
 
     if not os.path.exists(args.path_to_filter_drupal_xml):
-	print "Sorry, %s doesn't appear to exist." % args.path_to_filter_drupal_xml
+	print "Sorry, Drupal filter file {0} doesn't appear to exist.".format(args.path_to_filter_drupal_xml)
 	sys.exit(1)
 
     with open(args.path_to_filter_drupal_xml, 'r') as f:
