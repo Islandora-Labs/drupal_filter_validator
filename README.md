@@ -16,7 +16,7 @@ Note that filter-drupal.xml files currently distributed with Islandora don't inc
 
 ## Requirements
 
-* Python 2.7 or higher, which should already be installed on any server that Fedora Commons runs on.
+* Python 2.7 or Python 3 or higher, which should already be installed on any server that Fedora Commons runs on.
 * `mysqlshow` must be installed on the server where the script is running.
 
 
